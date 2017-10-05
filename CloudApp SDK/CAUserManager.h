@@ -9,10 +9,12 @@
 #import <Foundation/Foundation.h>
 
 #import "CAUser.h"
+#import "CASocket.h"
 
 @interface CAUserManager : NSObject
 
 @property (nonatomic, readonly) CAUser *currentUser;
+@property (nonatomic, readonly) CASocket *socketInfo;
 
 + (instancetype)sharedInstance;
 
@@ -38,4 +40,5 @@
 
 - (void)setEmail:(NSString *)email currentPassword:(NSString *)oldPassword success:(void (^)(CAUser *user))success failure:(void (^)(NSError *error))failure;
 
+- (void)getSocketDetails:(void (^)(CASocket *socket))success failure:(void (^)(NSError *error))failure;
 @end

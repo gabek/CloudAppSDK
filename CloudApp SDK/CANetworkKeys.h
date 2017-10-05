@@ -65,5 +65,10 @@ static NSString *const kVideo                      = @"video";
 static NSString *const kAudio                      = @"audio";
 static NSString *const kBookmark                   = @"bookmark";
 static NSString *const kUnknown                    = @"unknown";
+static NSString *const kSocket                     = @"socket";
+static NSString *const kAuthURL                    = @"auth_url";
+static NSString *const kAPIKey                     = @"api_key";
+static NSString *const kAppID                      = @"app_id";
+static NSString *const kChannels                   = @"channels";
 
 #endif /* CANetworkKeys_h */

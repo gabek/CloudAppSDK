@@ -14,6 +14,7 @@
 @interface CAUserManager () <NSURLSessionDelegate>
 @property (nonatomic) NSURLCredential *credential;
 @property (nonatomic) CAUser *currentUser;
+@property (nonatomic) CASocket *socketDetails;
 @end
 
 @implementation CAUserManager
@@ -71,6 +72,28 @@
             }
             else if (failure) {
                 self.credential = nil;
+                failure(error);
+            }
+        });
+    };
+}
+
+- (void (^)(NSData *data, NSURLResponse *response, NSError *error))completionBlockForSocketDetailsWithSuccess:(void (^)(CASocket *socket))success failure:(void (^)(NSError *error))failure {
+    return ^(NSData *data, NSURLResponse *response, NSError *error) {
+        CASocket *socket = nil;
+        if (data != nil) {
+            id object = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:NULL];
+            if ([object isKindOfClass:[NSDictionary class]]) {
+                socket = [[CASocket alloc] initWithDictionary:(NSDictionary *)object[kSocket]];
+                self.socketDetails = socket;
+            }
+        }
+            
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (socket && success) {
+                success(self.socketDetails);
+            } else if (failure) {
+                self.socketDetails = nil;
                 failure(error);
             }
         });
@@ -161,6 +184,11 @@
                                                     body:@{kUser:@{kEmail:email, kCurrnetPassword:oldPassword}}
                                               completion:[self completionBlockForCurrentUserWithSuccess:success failure:failure]];
 }
+
+- (void)getSocketDetails:(void (^)(CASocket *socket))success failure:(void (^)(NSError *error))failure {
+    [[CANetworkManager sharedInstance] getRequestWithURL:[CANetworkManager secureUrlWithExtension:accountExtension] completion:[self completionBlockForSocketDetailsWithSuccess:success failure:failure]];
+}
+
 
 #pragma mark - NSURLSession Delegate
 
