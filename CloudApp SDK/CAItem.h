@@ -30,6 +30,7 @@ typedef NS_ENUM(NSInteger, CAItemType) {
 @property (nonatomic, readonly) NSURL *url;
 @property (nonatomic, readonly) NSURL *contentURL;
 @property (nonatomic, readonly) NSURL *downloadURL;
+@property (nonatomic, readonly) NSURL *thumbnailURL;
 @property (nonatomic, readonly) CAItemType type;
 @property (nonatomic, readonly) NSInteger views;
 @property (nonatomic, readonly) NSURL *iconURL;

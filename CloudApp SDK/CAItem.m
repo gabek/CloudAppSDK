@@ -22,6 +22,7 @@
 @property (nonatomic) NSURL *url;
 @property (nonatomic) NSURL *contentURL;
 @property (nonatomic) NSURL *downloadURL;
+@property (nonatomic) NSURL *thumbnailURL;
 @property (nonatomic) CAItemType type;
 @property (nonatomic) NSInteger views;
 @property (nonatomic) NSURL *iconURL;
@@ -105,6 +106,7 @@
         self.url          = [NSURL URLWithString:dictionary[kURL]];
         self.downloadURL  = [NSURL URLWithString:dictionary[kDownloadURL]];
         self.contentURL   = [NSURL URLWithString:dictionary[kContentURL]];
+        self.thumbnailURL = [NSURL URLWithString:dictionary[kThumbnailURL]];
         self.type         = [CAItem typeForAPIValue:dictionary[kItemType]];
         self.views        = [dictionary[kViewCounter] integerValue];
         self.iconURL      = [NSURL URLWithString:dictionary[kIcon]];

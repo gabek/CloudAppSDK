@@ -45,6 +45,7 @@ static NSString *const kURL                        = @"url";
 static NSString *const kErrors                     = @"errors";
 static NSString *const kContentSize                = @"content_length";
 static NSString *const kDownloadURL                = @"download_url";
+static NSString *const kThumbnailURL               = @"thumbnail_url";
 static NSString *const kContentURL                 = @"content_url";
 static NSString *const kShareURL                   = @"share_url";
 static NSString *const kItemType                   = @"item_type";
